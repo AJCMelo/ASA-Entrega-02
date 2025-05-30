@@ -1,0 +1,12 @@
+$TTL    604800         ; tempo de vida padrão dos registros
+@       IN  SOA ns.asa.br. admin.asa.br. (
+                            3   ; serial (a cada alteração, incremente este número)
+                       604800   ; refresh
+                        86400   ; retry
+                      2419200   ; expire
+                       604800 ) ; negative caching
+;
+@       IN  NS  ns.asa.br.   ; servidor de nomes
+@       IN  A   10.6.0.20    ; faz asa.br apontar para o proxy
+ns      IN  A   10.5.0.10    ; IP do container DNS
+www     IN  A   10.6.0.20    ; IP do proxy

@@ -1,8 +1,10 @@
-FROM debian:latest
+# 1) Base: usamos o Nginx oficial
+FROM nginx:alpine
 
-#Instalando ferramentas de teste de rede
+# 2) Copiamos nossa configuração personalizada
+COPY default.conf /etc/nginx/conf.d/default.conf
 
-RUN apt update
-RUN apt upgrade -y
-RUN apt install net-tools dnsutils -y
-RUN apt install -y net-tools dnsutils iputils-ping
+# 3) Expomos porta HTTP
+EXPOSE 80
+
+# 4) O próprio Nginx, na imagem, já está preparado para iniciar

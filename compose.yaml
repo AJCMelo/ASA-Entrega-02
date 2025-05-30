@@ -1,0 +1,48 @@
+services:
+  dns:
+    build: ./dns
+    container_name: dns_server
+    ports:
+      - "53:53/udp"
+    networks:
+      dns_net:
+        ipv4_address: 10.5.0.10
+
+  web01:
+    build: ./web01
+    container_name: web_server1
+    networks:
+      web_net:
+        ipv4_address: 10.6.0.11
+
+  web02:
+    build: ./web02
+    container_name: web_server2
+    networks:
+      web_net:
+        ipv4_address: 10.6.0.12
+
+  proxy:
+    build: ./proxy
+    container_name: proxy_server
+    ports:
+      - "80:80"
+    depends_on:
+      - web01
+      - web02
+    networks:
+      web_net:
+        ipv4_address: 10.6.0.20
+
+networks:
+  dns_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/24
+
+  web_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/24

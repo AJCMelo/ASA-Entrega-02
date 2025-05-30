@@ -1,0 +1,5 @@
+// Definição da zona "asa.br"
+zone "asa.br" {
+    type master;               // é zona primária, onde se faz alterações
+    file "/etc/bind/db.asa.br"; // aponta para o arquivo de registros
+};
